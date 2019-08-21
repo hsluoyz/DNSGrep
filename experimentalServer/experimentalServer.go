@@ -10,29 +10,16 @@ import (
 
 	"github.com/gorilla/mux"
 
+	"github.com/hsluoyz/DNSGrep/response"
 	. "github.com/hsluoyz/dnsgrep/DNSBinarySearch"
 )
 const (
 	configJSON = "/home/ubuntu/go/src/dnsgrep/experimentalServer/config.json"
 )
-// a struct for the metadata contained in the JSON
-type MetaJSON struct {
-	Runtime   string // not the most efficent way to convey this...
-	Errors    []string
-	Message   string `json:"Message"` // custom message to send
-	FileNames []string `json:"FileNames"`// list of filenames scanned
-	TOS       string `json:"TOS"`
-}
 
-// a struct for the response json
-type ResponseJSON struct {
-	Meta   MetaJSON
-	FDNS_A []string
-	RDNS   []string
-}
 // load config
-func GetMeta(path string) (MetaConfig *MetaJSON) {
-	MetaConfig = new(MetaJSON)
+func GetMeta(path string) (MetaConfig *response.MetaJSON) {
+	MetaConfig = new(response.MetaJSON)
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		log.Fatalf("Error opening config file: %v", err)
@@ -83,7 +70,7 @@ func DNSHandler(w http.ResponseWriter, r *http.Request) {
 		runtimeStr := fmt.Sprintf("%f seconds", delta.Seconds())
 
 		// now put together our JSON!
-		ret := ResponseJSON{
+		ret := response.ResponseJSON{
 			FDNS_A: fdns_a,
 			RDNS:   rdns,
 		}
