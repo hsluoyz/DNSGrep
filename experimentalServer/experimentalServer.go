@@ -1,14 +1,16 @@
 package main
 
 import (
-	. "dnsgrep/DNSBinarySearch"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
-	"io/ioutil"
+
 	"github.com/gorilla/mux"
+
+	. "github.com/hsluoyz/dnsgrep/DNSBinarySearch"
 )
 const (
 	configJSON = "/home/ubuntu/go/src/dnsgrep/experimentalServer/config.json"

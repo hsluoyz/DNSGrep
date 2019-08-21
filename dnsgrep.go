@@ -3,7 +3,7 @@
 package main
 
 import (
-	. "dnsgrep/DNSBinarySearch"
+	. "github.com/hsluoyz/dnsgrep/DNSBinarySearch"
 
 	"fmt"
 	"os"
